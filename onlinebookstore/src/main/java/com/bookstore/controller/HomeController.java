@@ -32,11 +32,7 @@ public class HomeController {
 	{
 		return "this is a message from home controller";
 	}
-	@RequestMapping("/a")
-	public String home2()
-	{
-		return "this is a message from home2";
-	}
+	
 	@RequestMapping(value="/qlcode/calc", method= {RequestMethod.GET})
 	public int calc(int a,int b)
 	{
