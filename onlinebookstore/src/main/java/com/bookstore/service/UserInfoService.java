@@ -1,17 +1,12 @@
-package com.bookstore.controller;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+package com.bookstore.service;
 
 import com.bookstore.model.UserInfo;
 
 public class UserInfoService {
-	public static UserInfo findInDatabase(String name)
+	public static UserInfo findInDatabase(UserInfo user)
 	{
 		//find in databse
-		return null;
+		return user;
 	}
 
 	public static boolean comparePwd(String password, String password2) {

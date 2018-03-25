@@ -1,23 +1,29 @@
 package com.bookstore.controller;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.bookstore.model.UserInfo;
+import com.bookstore.service.UserInfoService;
 
-@RestController
+@Controller
 public class LogInController {
-	@RequestMapping( value="/login",method=RequestMethod.POST)
-
-	public String login(@RequestBody UserInfo user)
+	@GetMapping( value="/login")
+	public String login()
 	{
-		System.out.println(user.getId());
-		System.out.println(user.getName());
+		return "login";
+	}
+	@PostMapping( value="/login")
+	public String login(@ModelAttribute UserInfo user,HttpServletRequest request, ModelMap map)
+	{
+		System.out.println(user.getUserID());
 		System.out.println(user.getPassword());
 		//find in database
-		UserInfo userInDB=UserInfoService.findInDatabase(user.getName());
+		UserInfo userInDB=UserInfoService.findInDatabase(user);
 //		JSONObject jsonObject = new JSONObject();
 		if (userInDB==null)
 		{
@@ -32,6 +38,11 @@ public class LogInController {
 //			jsonObject.put();
 		}
 //		return jsonObject;
-		return "log in successful";
+		
+		map.put("UserID", user.getUserID());
+		map.put("Password", user.getPassword());
+		
+		request.setAttribute("HelloMessage", "This is a hello message from HttpServletRequest.Attribute");
+		return "home";
 	}
 }

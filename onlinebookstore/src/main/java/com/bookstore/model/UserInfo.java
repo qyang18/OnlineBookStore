@@ -1,40 +1,42 @@
 package com.bookstore.model;
 
 public class UserInfo {
-//		int id;
-		String id;
-		String name;
-		String password;
+		String UserID;
+		String Password;
+		String PersonName;
+		
+		public UserInfo()
+		{
+			
+		}
 		public UserInfo(String id, String name,String password)
 		{
-			this.id=id;
-			this.name=name;
-			this.password=password;
+			this.UserID=id;
+			
+			this.Password=password;
 		}
 		
-		public String getName() {
-			return name;
-		}
-		
-		public void setName(String name) {
-			this.name = name;
-		}
 		
 		public String getPassword() {
-			return password;
+			return Password;
 		}
 		
 		public void setPassword(String password) {
-			this.password = password;
+			this.Password = password;
 		}
 		
-		public String getId() {
-			return id;
+		public String getUserID() {
+			return UserID;
 		}
 		
-		public void setId(String id) {
-			this.id = id;
+		public void setUserID(String id) {
+			this.UserID = id;
 		}
 		
-		
+		public String getPersonName() {
+			return PersonName;
+		}
+		public void setPersonName(String personName) {
+			PersonName = personName;
+		}
 }
