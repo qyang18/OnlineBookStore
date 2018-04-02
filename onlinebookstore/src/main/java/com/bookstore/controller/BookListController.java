@@ -1,16 +1,25 @@
 package com.bookstore.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class BookListController {
-	@RequestMapping("/bookList")
+	@RequestMapping("/List")
 	public String getBookList()
 	{
-		//DAO get data->list
-		//pass to model
-		return "viewBookList";
+		return "viewInfo";
+	}
+	
+	@RequestMapping("/book")
+	public String getBook()
+	{
+		return "viewGoogleBookList";
+	}
+
+	@RequestMapping("/sampleDataTable")
+	public String getSampleDataTable()
+	{
+		return "SampleDataTable";
 	}
 }
