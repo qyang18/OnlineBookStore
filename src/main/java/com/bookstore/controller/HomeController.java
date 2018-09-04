@@ -2,7 +2,6 @@ package com.bookstore.controller;
 
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -17,7 +16,7 @@ import com.bookstore.beans.UserListBean;
 
 @Controller
 public class HomeController {
-	Logger log=Logger.getLogger(com.bookstore.controller.HomeController.class);
+	//Logger log=Logger.getLogger(com.bookstore.controller.HomeController.class);
 			
 	@Autowired
 	private ApplicationContext context;

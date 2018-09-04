@@ -2,8 +2,10 @@ package com.bookstore.controller;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,12 +23,13 @@ import com.bookstore.repository.CustomerRepo;
 //@RestController
 @Controller
 public class JPAController {
+	
 	@Autowired
 	private CustomerRepo customerRepo;
 
 	@Autowired
 	private BookRepo bookRepo;
-	
+
 	@Autowired
 	private AuthorRepo authorRepo;
 
@@ -48,8 +51,8 @@ public class JPAController {
 
 	@ResponseBody
 	@RequestMapping("/getCustomer/{id}")
-	public Customer getCustomer(@PathVariable Long id) {
-		return customerRepo.findOne(id);
+	public Optional<Customer> getCustomer(@PathVariable Long id) {
+		return customerRepo.findById(id);
 	}
 
 	@ResponseBody
@@ -65,23 +68,35 @@ public class JPAController {
 		set.add(new Author("Qi", "Yang"));
 		set.add(new Author("Yuchen", "Lu"));
 		Book book = new Book("ISBN1", "Three Body", 35L, set);
-		
-		//non cascade CRUD operation:
+
+		// non cascade CRUD operation:
 //		for (Author author : set) {
 //			authorRepo.save(author);
 //		}
 //		bookRepo.save(book);
-		
-		//cascade CRUD operation:
+
+		// cascade CRUD operation:
 		bookRepo.save(book);
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/testFetch")
-	public Set<Author> testFetch() {		
-		Book book = bookRepo.findOne(1L);
-		Set<Author> set = book.getAuthors();
+	public Set<Author> testFetch() {
+		Optional<Book> book = bookRepo.findById(1L);
+		Set<Author> set = book.get().getAuthors();
 		return set;
 	}
 
+	@ResponseBody
+	@RequestMapping("/cheapBooksHQL")
+	public Set<Book> cheapBooksHQL(@RequestParam("maxPrice") Long maxPrice) {
+//		return bookRepo.getCheapBooks(maxPrice);
+		return bookRepo.getCheapBooksHQL(maxPrice);
+	}
+
+	@ResponseBody
+	@RequestMapping("/cheapBooksSQL")
+	public Set<Book> cheapBooksSQL(@RequestParam("maxPrice") Long maxPrice) {
+		return bookRepo.getCheapBooksSQL(maxPrice);
+	}
 }

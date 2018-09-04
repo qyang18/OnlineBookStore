@@ -28,10 +28,10 @@ public class Book {
 //	@JoinColumn
 //	@ElementCollection(targetClass=Author.class)
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn
+	@JoinColumn(name="Author_Id")
 	private Set<Author> Authors;
 
-	private Book() {
+	public Book() {
 	}
 
 	public Book(String iSBN, String name, Long price, Set<Author> authors) {
@@ -72,4 +72,13 @@ public class Book {
 	public void setAuthors(Set<Author> authors) {
 		Authors = authors;
 	}
+
+	public Long getPrice() {
+		return price;
+	}
+
+	public void setPrice(Long price) {
+		this.price = price;
+	}
+	
 }

@@ -2,7 +2,6 @@ package com.bookstore.controller;
 
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -18,7 +17,7 @@ import com.bookstore.beans.UserListBean;
 @Controller
 public class RegisterController {
 	
-	Logger log=Logger.getLogger(com.bookstore.controller.RegisterController.class);
+	// Logger log=Logger.getLogger(com.bookstore.controller.RegisterController.class);
 	
 	@Autowired
 	private ApplicationContext context;
@@ -43,7 +42,7 @@ public class RegisterController {
 			return "already used";
 		} else {
 			map.put(user.getUserID(), user.getPassword());
-			log.error("register success\n UserID=" + user.getUserID() + "\n Password=" + user.getPassword());
+			// log.error("register success\n UserID=" + user.getUserID() + "\n Password=" + user.getPassword());
 			return "UserView";
 		}
 	}
