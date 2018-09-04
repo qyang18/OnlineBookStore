@@ -1,5 +1,6 @@
 package com.bookstore.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -7,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Customer {
@@ -17,7 +20,9 @@ public class Customer {
 	private String firstName;
 	@Column(name = "Xing", length = 2000)
 	private String lastName;
-	private Set<String> favorite;
+	@OneToMany
+	@JoinColumn
+	private Set<Book> favorite;
 
 	private Customer() {
 	}
@@ -57,11 +62,11 @@ public class Customer {
 		this.lastName = lastName;
 	}
 
-	public Set<String> getFavorite() {
+	public Set<Book> getFavorite() {
 		return favorite;
 	}
 
-	public void setFavorite(Set<String> favorite) {
+	public void setFavorite(Set<Book> favorite) {
 		this.favorite = favorite;
 	}
 

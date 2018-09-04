@@ -1,13 +1,14 @@
 package com.bookstore.entity;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Author {
@@ -16,7 +17,16 @@ public class Author {
 	private Long id;
 	private String firstName;
 	private String lastName;
-	private Set<Book> works;
+//	@ManyToMany(cascade = CascadeType.ALL)
+//	private Set<Book> books=new HashSet<Book>();
+
+	private Author() {
+	}
+
+	public Author(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 
 	public Long getId() {
 		return id;
@@ -42,12 +52,12 @@ public class Author {
 		this.lastName = lastName;
 	}
 
-	public Set<Book> getWorks() {
-		return works;
-	}
-
-	public void setWorks(Set<Book> works) {
-		this.works = works;
-	}
+//	public Set<Book> getBooks() {
+//		return books;
+//	}
+//
+//	public void setBooks(Set<Book> works) {
+//		this.books = works;
+//	}
 
 }

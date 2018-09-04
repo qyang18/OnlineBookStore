@@ -1,12 +1,15 @@
 package com.bookstore.entity;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -18,9 +21,25 @@ public class Book {
 	private String ISBN;
 
 	private String Name;
-	
-	@OneToMany
+
+	private Long price;
+
+//	@ManyToMany(cascade = CascadeType.ALL)
+//	@JoinColumn
+//	@ElementCollection(targetClass=Author.class)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn
 	private Set<Author> Authors;
+
+	private Book() {
+	}
+
+	public Book(String iSBN, String name, Long price, Set<Author> authors) {
+		ISBN = iSBN;
+		Name = name;
+		this.price = price;
+		Authors = authors;
+	}
 
 	public Long getId() {
 		return id;

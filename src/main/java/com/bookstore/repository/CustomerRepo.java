@@ -6,6 +6,6 @@ import com.bookstore.entity.Customer;
 
 public interface CustomerRepo extends JpaRepository<Customer, Long>{
 	
-	public Customer getCustomerByFirstName(String firstName);
+	public Customer findCustomerByFirstName(String firstName);
 	
 }
