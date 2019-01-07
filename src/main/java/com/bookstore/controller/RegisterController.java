@@ -22,9 +22,11 @@ public class RegisterController {
 	@Autowired
 	private ApplicationContext context;
 	
+	@Autowired
+	private UserListBean userList;
+	
 	@RequestMapping(value = "/register", method = { RequestMethod.GET })
 	public String qlcodeCreateWeb3(@RequestParam("registerusername") String user) {
-		UserListBean userList = context.getBean(UserListBean.class);
 		Map<String, String> map = userList.getMap();
 		if (map.containsKey(user)) {
 			return "already used";
@@ -36,7 +38,6 @@ public class RegisterController {
 
 	@PostMapping("/registerWithForm")
 	public String formRegister(@ModelAttribute UserBean user) {
-		UserListBean userList = context.getBean(UserListBean.class);
 		Map<String, String> map = userList.getMap();
 		if (map.containsKey(user.getUserID())) {
 			return "already used";
