@@ -16,6 +16,7 @@ public class RestAPIController {
 		aaData aaData = new aaData("Pride and Prejudice", Arrays.asList("Jane Austin"), "C. Scribner's sons", "1918", 4,
 				"en", 1);
 		BookBean book = new BookBean("books#volume", "s1gVAAAAYAAJ", aaData, 1);
+		System.out.println("Book.json executed");
 		return book;
 	}
 }
