@@ -6,7 +6,7 @@
 	<groupId>com.bookstore</groupId>
 	<artifactId>onlinebookstore</artifactId>
 	<version>1.0.0</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<name>onlinebookstore</name>
 
 
@@ -16,15 +16,29 @@
 		<version>2.1.2.RELEASE</version>
 	</parent>
 
+	<profiles>
+		<profile>
+			<id>generic</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<profile.environment>generic</profile.environment>
+				<profile.exclude.devtools>true</profile.exclude.devtools>
+			</properties>
+		</profile>
+	</profiles>
+	
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<start-class>com.bookstore.App</start-class>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -97,6 +111,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>OnlineBookStoreFinalName</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
