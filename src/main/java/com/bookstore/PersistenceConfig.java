@@ -4,7 +4,6 @@ import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -23,12 +22,20 @@ public class PersistenceConfig {
 	private String schema;
 	private String driverClassName;
 
+//	@Bean
+//	public DataSource dataSource(DataSourceProperties dataSourceProperties) {
+//		log.info("SSH connect started by DataSourceConfig");
+//		HikariDataSource dataSource = DataSourceBuilder.create().type(HikariDataSource.class)
+//				.username(dataSourceProperties.getUsername()).password(dataSourceProperties.getPassword())
+//				.url(dataSourceProperties.getUrl()).driverClassName(dataSourceProperties.getDriverClassName()).build();
+//		return dataSource;
+//	}
 	@Bean
-	public DataSource dataSource(DataSourceProperties dataSourceProperties) {
+	public DataSource dataSource() {
 		log.info("SSH connect started by DataSourceConfig");
 		HikariDataSource dataSource = DataSourceBuilder.create().type(HikariDataSource.class)
-				.username(dataSourceProperties.getUsername()).password(dataSourceProperties.getPassword())
-				.url(dataSourceProperties.getUrl()).driverClassName(dataSourceProperties.getDriverClassName()).build();
+				.username(username).password(password)
+				.url(url).driverClassName(driverClassName).build();
 		return dataSource;
 	}
 
