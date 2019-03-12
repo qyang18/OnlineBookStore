@@ -13,7 +13,7 @@ spring:
 #    remoteHost: eavs01dbp71.ssaform4641.net
 #    remotePort: 1522
   datasource:
-    driverClassName: oracle.jdbc.OracleDriver
+    driver-class-name: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@localhost:1521:xe
     username: dev
     password: 123

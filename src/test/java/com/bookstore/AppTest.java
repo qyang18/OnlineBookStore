@@ -13,6 +13,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ContextConfiguration;
@@ -23,10 +25,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
-@RunWith(SpringRunner.class)
+@RunWith(SpringRunner.class) // Indicates that the class should use Spring's JUnit facilities
+@ContextConfiguration(classes = { App.class, PersistenceConfig.class, BeansConfiguration.class }) // load application
+																									// context
 @WebAppConfiguration
-@ContextConfiguration(classes = { App.class, PersistenceConfig.class, BeansConfiguration.class })
 @SpringBootTest
+//@PropertySource(value = {"classpath:application.yml"})
 public class AppTest {
 	@Autowired
 	WebApplicationContext wac;
@@ -34,6 +38,7 @@ public class AppTest {
 	DataSource dataSource;
 
 	private MockMvc mockMvc;
+	private JdbcTemplate jdbcTemplate;
 
 	private MockHttpServletRequest request;
 	private MockHttpServletResponse response;
@@ -46,6 +51,7 @@ public class AppTest {
 		mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
 		request = new MockHttpServletRequest();
 		response = new MockHttpServletResponse();
+		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
 //	@Test
@@ -67,6 +73,8 @@ public class AppTest {
 		Assert.assertNotNull(wac.getServletContext());
 		Assert.assertNotNull(wac.getBean("JPAController"));
 		Assert.assertNotNull(dataSource);
+		long ret=jdbcTemplate.queryForObject("select count(1) from users", long.class);
+		Assert.assertTrue(ret>1L);
 	}
 
 	@Test
