@@ -69,16 +69,16 @@ public class AppTest {
 //	}
 
 	@Test
-	public void testBeanExists() {
+	public void testBeanAndDBConnection() {
 		Assert.assertNotNull(wac.getServletContext());
 		Assert.assertNotNull(wac.getBean("JPAController"));
 		Assert.assertNotNull(dataSource);
-		long ret=jdbcTemplate.queryForObject("select count(1) from users", long.class);
-		Assert.assertTrue(ret>1L);
+		long ret = jdbcTemplate.queryForObject("select count(1) from users", long.class);
+		Assert.assertTrue(ret > 1L);
 	}
 
 	@Test
-	public void testAddCustomer() throws Exception {
+	public void testRequestMapping() throws Exception {
 //		ResultMatcher ok = MockMvcResultMatchers.status().isOk();
 //		ResultMatcher msg=MockMvcResultMatchers.model().attribute(name, matcher)
 //		ResultMatcher retMsg = MockMvcResultMatchers.content().string("save customer successed");
@@ -89,4 +89,8 @@ public class AppTest {
 		mockMvc.perform(get("/book.json")).andExpect(status().isOk());
 	}
 
+	@Test
+	public void integrationTest() {
+		
+	}
 }
