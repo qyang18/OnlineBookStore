@@ -5,9 +5,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +35,9 @@ public class JPAController {
 
 	@Autowired
 	private AuthorRepo authorRepo;
+	
+	@Autowired
+	private DataSource dataSource;
 
 	@ResponseBody
 	@RequestMapping("/addCustomer")
@@ -97,5 +104,14 @@ public class JPAController {
 	@RequestMapping("/cheapBooksSQL")
 	public Set<Book> cheapBooksSQL(@RequestParam("maxPrice") Long maxPrice) {
 		return bookRepo.getCheapBooksSQL(maxPrice);
+	}
+	
+	@ResponseBody
+	@RequestMapping("/testDataSource")
+	public String testDataSource()
+	{
+		JdbcTemplate jdbcTemplate=new JdbcTemplate(dataSource);
+		long retVal=jdbcTemplate.queryForObject("select count(1) from users", long.class);
+		return "Return Value="+retVal;
 	}
 }

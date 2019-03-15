@@ -12,17 +12,23 @@ spring:
 #    hostPort: 22
 #    remoteHost: eavs01dbp71.ssaform4641.net
 #    remotePort: 1522
-  datasource:
-    driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521:xe
-    username: dev
-    password: 123
-    pool-size: 30
 #  db-package:
 #    schema: dev_app
-  test:
-    list:
-    - element1
-    - element2
-    - element3
-    test-name: young
+  profiles:
+    active: default
+---
+spring:
+  profiles: default
+  datasource:
+    url: jdbc:h2:file:~/bookStoreDB 
+    username: sa 
+    password: 123
+    driver-class-name: org.h2.Driver 
+#---
+#spring:
+#  profiles: remote
+#  datasource:
+#    driver-class-name: oracle.jdbc.OracleDriver
+#    url: jdbc:oracle:thin:@localhost:1521:xe
+#    username: dev
+#    password: 123
