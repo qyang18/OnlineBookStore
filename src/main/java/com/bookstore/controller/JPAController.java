@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -111,7 +110,16 @@ public class JPAController {
 	public String testDataSource()
 	{
 		JdbcTemplate jdbcTemplate=new JdbcTemplate(dataSource);
-		long retVal=jdbcTemplate.queryForObject("select count(1) from users", long.class);
+		long retVal=jdbcTemplate.queryForObject("select count(1) from Customer", long.class);
+		return "Return Value="+retVal;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/testQueryForLong")
+	public String testQuery(@RequestParam("query") String query)
+	{
+		JdbcTemplate jdbcTemplate=new JdbcTemplate(dataSource);
+		long retVal=jdbcTemplate.queryForObject(query, long.class);
 		return "Return Value="+retVal;
 	}
 }

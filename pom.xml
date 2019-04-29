@@ -28,8 +28,8 @@
 			</properties>
 		</profile>
 	</profiles>
-	
-	
+
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<start-class>com.bookstore.App</start-class>
@@ -129,6 +129,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<addResources>true</addResources>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
@@ -138,5 +141,22 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<resources>
+			<!-- Packaging WEB-INF in jar file -->
+			<resource>
+				<directory>src/main/webapp/WEB-INF</directory>
+				<targetPath>WEB-INF</targetPath>
+				<includes>
+					<include>**/**</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/**</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
 	</build>
 </project>

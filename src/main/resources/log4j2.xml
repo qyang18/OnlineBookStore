@@ -2,7 +2,7 @@
 <configuration>
 	<properties>
 		<property name="name">OnlineBookStore</property>
-		<property name="logPath">C:\Users\yangq\Desktop\Logs</property>
+		<property name="logPath">\Logs</property>
 		<property name="pattern">%d{yyyy-MM-dd HH:mm:ss.SSS} | %-5.5p | %-10.10t | %-20.20C:%-5.5L |%X{logID}| %msg%n</property>
 		<!-- Pattern looks like: 2018-03-14 12:02:46.443 | DEBUG | tartStop-1 | ot.StartupInfoLogger:51    | Running with Spring Boot v1.5.10.RELEASE, Spring v4.3.14.RELEASE -->
 	</properties>
